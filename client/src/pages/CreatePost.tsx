@@ -1,24 +1,52 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import preview from '../assets/preview.png'
 import FormField from '../components/FormField'
 import Loader from '../components/Loader'
-import { createPostModel } from '../models/createPostModel'
+import { postModel } from '../models'
+import { generatedImageService } from '../services/dalle'
+import { uploadPostService } from '../services/posts'
 import getRandomPrompt from '../utils/getRandomPrompt'
 
 
 const CreatePost = () => {
     const navigate = useNavigate();
-    const [form, setForm] = useState<createPostModel>({ name: '', prompt: '', photo: '' });
+    const [form, setForm] = useState<postModel>({ name: '', prompt: '', photo: '' });
     const [generatingImg, setGeneratingImg] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
 
-    const generateImage = () => {
-
+    const generateImage = async () => {
+        if (form.prompt) {
+            try {
+                setGeneratingImg(true);
+                const data = await generatedImageService(form.prompt);
+                setForm({ ...form, photo: `data:image/jpeg;base64,${data.image}` })
+            } catch (error) {
+                console.log(error)
+                alert(error)
+            } finally {
+                setGeneratingImg(false);
+            }
+        } else {
+            alert('please enter prompt')
+        }
     }
-    const handleSubmit = () => {
-
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        if (form.prompt && form.photo) {
+            setLoading(true);
+            try {
+                await uploadPostService(form);
+                navigate('/')
+            } catch (error) {
+                alert(error);
+            } finally {
+                setLoading(false);
+            }
+        } else {
+            alert('Please enter a prompt and generate image')
+        }
     }
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setForm({ ...form, [e.target.name]: e.target.value })

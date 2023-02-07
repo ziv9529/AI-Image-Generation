@@ -1,5 +1,5 @@
 import React from 'react'
-import { formFieldModel } from '../models/formFieldModel'
+import { formFieldModel } from '../models'
 
 const FormField = (props: formFieldModel) => {
   const { LableName, type, handleChange, name, placeholder, value, handleSurpriseMe, isSurpriseMe } = props

@@ -1,1 +1,1 @@
-# AI DALL-E generation img
+# Full Stack MERN AI Image Generation App
