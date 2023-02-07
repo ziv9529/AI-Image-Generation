@@ -8,6 +8,11 @@ export interface postModel {
     prompt: string,
     photo: string
 }
+export interface generatePostModel {
+    name: string,
+    prompt: string,
+    photo: string[]
+}
 export interface cardModel {
     _id: string,
     name: string,

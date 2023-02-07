@@ -17,16 +17,18 @@ router.route('/').get((req: Request, res: Response) => {
 })
 router.route('/').post(async (req: Request, res: Response) => {
     try {
-        const { prompt } = req.body;
+        const { prompt, numOfImage } = req.body;
+        if (parseInt(numOfImage) < 1 || parseInt(numOfImage) > 3) return res.status(404).json({ message: "bed request" })
         const aiResponse = await openai.createImage({
             prompt,
-            n: 1,
+            n: parseInt(numOfImage),
             size: '1024x1024',
             response_format: 'b64_json'
         })
-        const image = aiResponse.data.data[0].b64_json;
 
-        return res.status(200).json({ image })
+        const images = aiResponse.data;
+
+        return res.status(200).json({ images })
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: error?.message })
