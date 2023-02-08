@@ -9,7 +9,7 @@
     "all": "concurrently -k -p \"[{name}]\" -n \"TS-Compile-Api,Api\" -c \"blue,red\"  \"npm run build-watch\" \"npm run start-dev\"",
     "start": "node ./dist/index.js",
     "build:start": "tsc && npm start",
-    "build": "npm install typescript && npx tsc --watch"
+    "build": "npm install typescript && npx tsc"
   },
   "keywords": [],
   "author": "",
