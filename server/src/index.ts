@@ -13,6 +13,7 @@ app.use(express.json({ limit: '50mb' }));
 
 app.use((req: Request, res: Response, next: NextFunction) => {
     let log = `User visited at ${new Date()} with IP address: ${req.socket.remoteAddress}\n`;
+    console.log(log);
     fs.appendFile('visitor_logs.txt', log, (err) => {
         if (err) throw err;
         console.log('Visitor log saved successfully.');
