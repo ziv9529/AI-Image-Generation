@@ -1,5 +1,4 @@
 # MERN AI Art Generator 
-![OpenAI logo](https://openai.com/content/images/2019/07/openai-logo-horizontal-color.png)
 
 A web application that allows users to generate AI images and share their creations with the community. 
 
