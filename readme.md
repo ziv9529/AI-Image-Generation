@@ -15,8 +15,7 @@ A web application that allows users to generate AI images and share their creati
 ## Media
 
 <p float="left">
-  <img src="client/public/ai_img1.png" alt="big_img" width="450" />
-  <img src="client/public/ai_img2.png" alt="small_img" width="250" />
+  <img src="client/public/ai_img1.png" alt="big_img" width="550" />
 </p>
 
 ## Features
