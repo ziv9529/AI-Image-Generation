@@ -16,7 +16,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     console.log(log);
     fs.appendFile('visitor_logs.txt', log, (err) => {
         if (err) throw err;
-        console.log('Visitor log saved successfully.');
     });
     next();
 });
