@@ -4,11 +4,21 @@ import * as dotenv from 'dotenv'
 import mongoose from "mongoose";
 import postsRouter from "./routes/posts"
 import dalleRouter from "./routes/dalle"
+import fs from 'fs';
 
 dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '50mb' }));
+
+app.use((req: Request, res: Response, next: NextFunction) => {
+    let log = `User visited at ${new Date()} with IP address: ${req.socket.remoteAddress}\n`;
+    fs.appendFile('visitor_logs.txt', log, (err) => {
+        if (err) throw err;
+        console.log('Visitor log saved successfully.');
+    });
+    next();
+});
 
 app.use('/api/v1/post', postsRouter)
 app.use('/api/v1/dalle', dalleRouter)

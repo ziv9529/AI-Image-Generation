@@ -92,7 +92,7 @@ const CreatePost = () => {
                     />
                     <label className="block text-sm font-medium text-grey-900"> qty: {imgCount} </label>
                     <input disabled={generatingImg} type="range" name="range" id="range" min="1" max="3" defaultValue={imgCount} className="w-20" onChange={handleImgCountChange} />
-                    <div className='flex flex-wrap'>
+                    <div className='flex flex-wrap max-[480px]:justify-center'>
                         {Array.from({ length: parseInt(imgCount) }, (_, i) => (
                             <div onClick={() => {
                                 if (!form.photo[i]) return
@@ -115,7 +115,10 @@ const CreatePost = () => {
                         type='button'
                         onClick={generateImage}
                         className='text-white bg-green-700 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center '
-                    > {generatingImg ? 'Generating...' : 'Generate Image'} </button>
+                    > {generatingImg
+                        ? 'Generating...'
+                        : <>{parseInt(imgCount) > 1 ? 'Generat Images' : 'Generat Image'}</>}
+                    </button>
                 </div>
                 <div className='mt-10'>
                     <p className='mt-2 text-[#666e75] text-[14px]'> Once you have created and chose the image you want, you can share it with others in the community</p>

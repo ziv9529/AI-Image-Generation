@@ -1,6 +1,6 @@
 export interface RenderCardPropsModel {
-    data: any,
-    title: any
+    data: postModel[],
+    title: string
 }
 
 export interface postModel {

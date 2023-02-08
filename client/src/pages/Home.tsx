@@ -7,9 +7,8 @@ import { fetchAllPostsService } from '../services/posts';
 
 const RenderCards = (props: RenderCardPropsModel) => {
     const { data, title } = props
-    if (data?.length > 0) return data.map((post: any) => <Card key={post._id} {...post} />)
+    if (data?.length > 0) return <>{data.map((post: any) => <Card key={post._id} {...post} />)}</>
     return (<h2 className='mt-5 font-bold text-[#6469ff] text-xl uppercase ' >{title}</h2>)
-
 }
 
 const Home = () => {
@@ -17,7 +16,7 @@ const Home = () => {
     const [loading, setLoading] = useState<boolean>(false)
     const [allPosts, setAllPosts] = useState<postModel[]>([])
     const [searchText, setSearchText] = useState<string>('')
-    const [searchedResults, setSearchedResults] = useState<postModel[]>()
+    const [searchedResults, setSearchedResults] = useState<postModel[]>([])
     const [searchTimeout, setSearchTimeout] = useState<any>(null)
 
     useEffect(() => {
